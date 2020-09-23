@@ -19,12 +19,19 @@
       matInput
       placeholder="Izaberi datum"
       [matDatepicker]="picker"
-      [max]="maxDate">
-      <mat-datepicker-toggle
-      matSuffix
-      [for]="picker"></mat-datepicker-toggle>
+      [max]="maxDate"
+      ngModel
+      required
+      name="birthDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+
+
+    <mat-checkbox labelPosition="before" ngModel name="agree" color="primary" required class="example-margin">
+      Agree to terms
+    </mat-checkbox>
+
 
     <button type="submit" mat-raised-button color="primary">Potvrdi</button>
   </form>
