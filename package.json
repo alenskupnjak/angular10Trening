@@ -2,8 +2,7 @@
   "name": "angular10-trening",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
+    "start5007": "ng serve --port 5007 -o",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
