@@ -1,1 +1,29 @@
-<p>login works!</p>
+<section>
+  <form
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  fxLayoutgap="15px"
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit()" >
+    <mat-form-field>
+      <input matInput type="email" placeholder="Your email" formControlName="email">
+      <mat-hint>Molim upišite ispavan Email</mat-hint>
+      <mat-error>Email je neispravan</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="password" placeholder="Your password" formControlName="password">
+      <mat-hint>Molim upišite ispravan password</mat-hint>
+    </mat-form-field>
+     <button
+     type="submit"
+     mat-raised-button
+     color="primary"
+     class="button-submit"
+    [disabled]="loginForm.invalid">Potvrdi</button>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+  </form>
+</section>
+
+
+
