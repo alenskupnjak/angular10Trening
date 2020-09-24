@@ -20,7 +20,7 @@
   </li>
 
   <mat-list-item *ngIf="isAuth">
-    <button mat-icon-button>
+    <button mat-icon-button (click)="onLogout()">
       <mat-icon>eject</mat-icon>
       <span class="nav-caption">Logout</span>
     </button>
