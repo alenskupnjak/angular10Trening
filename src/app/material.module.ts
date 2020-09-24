@@ -11,6 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule, // side navigation
     MatToolbarModule,
     MatListModule,
+    MatTabsModule,
   ],
   exports: [
     MatSliderModule,
@@ -40,6 +42,7 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
+    MatTabsModule,
   ],
 })
 export class MaterialModule {}
