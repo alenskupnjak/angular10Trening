@@ -7,6 +7,30 @@
   background-color: #eee;
 }
 
-/* .boja {
-  background-color: #28a746;
-} */
+mat-sidenav-container,
+mat-sidenav-content,
+mat-sidenav {
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 200px;
+}
+
+a {
+  text-decoration: none; /* mice underline*/
+  color: #fff;
+}
+
+a:hover,
+a:active {
+  color: lightgrey;
+}
+
+.navigation-items {
+  text-decoration: none; /* mice underline*/
+  list-style: none; /* skriva kruzic ispred texta*/
+  padding: 0;
+  margin: 0;
+
+}

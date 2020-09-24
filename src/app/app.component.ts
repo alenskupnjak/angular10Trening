@@ -11,6 +11,6 @@ export class AppComponent {
   // @ViewChild('sidenav')
 
   onToggle() {
-    
+
   }
 }

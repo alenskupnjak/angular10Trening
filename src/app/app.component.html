@@ -1,15 +1,32 @@
-<mat-sidenav-container  class="example-container" >
+<mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav role="navigation">
+    <p>Sidenav content</p>
+    <p>Sidenav content</p>
+    <p>Sidenav content</p>
+    <p>Sidenav content</p>
+    <p>Sidenav content</p>
+    <p>Sidenav content</p>
+    <p>Sidenav content</p>
     <p>Sidenav content</p>
   </mat-sidenav>
   <mat-sidenav-content class="boja">
     <mat-toolbar color="primary">
-      <div><button (click)="sidenav.toggle()" >Toggle Sidenav</button></div>
-      <div>LOGO</div>
       <div>
-        <a routerLink="/signup">Signup</a>
-        <a routerLink="/login">Login</a>
-        <a routerLink="/training">Training</a>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <div><a routerLink="/">LOGO</a></div>
+      <div fxFlex fxLayout fxLayoutAlign="flex-end">
+        <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+          <li><a routerLink="/signup">Signup</a></li>
+          <li><a routerLink="/login">Login</a></li>
+          <li><a routerLink="/training">Training</a></li>
+        </ul>
+
+
+
+
       </div>
     </mat-toolbar>
     <main>
@@ -19,4 +36,3 @@
     <!-- Usmjerava nas na routing file -->
   </mat-sidenav-content>
 </mat-sidenav-container>
-
