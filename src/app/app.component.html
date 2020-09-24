@@ -1,2 +1,11 @@
-<!-- Usmjerava nas na routing file -->
-<router-outlet></router-outlet>
+<mat-sidenav-container  class="example-container" >
+  <mat-sidenav #sidenav role="navigation">
+    <p>Sidenav content</p>
+  </mat-sidenav>
+  <mat-sidenav-content class="boja">
+    <button mat-raised-button (click)="sidenav.toggle()">Show Sidenav</button>
+    <!-- Usmjerava nas na routing file -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
