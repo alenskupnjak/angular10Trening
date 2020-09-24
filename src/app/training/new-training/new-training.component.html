@@ -1,11 +1,29 @@
 <section class="new-training" fxLayout fxLayoutAlign="center center">
-  <mat-card fxFlex="400px">
-    <mat-card-title>
+  <mat-card fxFlex.xs="100%" fxFlex="400px">
+    <mat-card-title fxLayout fxLayoutAlign="center center">
       Naslov
     </mat-card-title>
-    <mat-card-title>Sadrzaj</mat-card-title>
-    <mat-card-actions>
-      <button type="submit" mat-button>Start</button>
+    <mat-card-content fxLayout fxLayoutAlign="center center">
+      <mat-form-field>
+        <mat-label>Favorite food</mat-label>
+        <mat-select>
+          <mat-option value="crunces">
+            Crunces
+          </mat-option>
+          <mat-option value="touch-toes">
+            Touch Toes
+          </mat-option>
+          <mat-option value="side-lunges">
+            Side Lunges
+          </mat-option>
+          <mat-option value="burpees">
+            BurPees
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions fxLayout fxLayoutAlign="center center">
+      <button type="submit" mat-raised-button color="accent">Start</button>
     </mat-card-actions>
   </mat-card>
 </section>
