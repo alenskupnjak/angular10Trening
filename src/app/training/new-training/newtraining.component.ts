@@ -2,9 +2,9 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   moduleId: 'module.id',
-  selector: 'app-new-training',
-  templateUrl: './new-training.component.html',
-  styleUrls: ['./new-training.component.css']
+  selector: 'app-newtraining',
+  templateUrl: './newtraining.component.html',
+  styleUrls: ['./newtraining.component.css']
 })
 export class NewTrainingComponent implements OnInit {
   @Output() treningStart = new EventEmitter<any>();
