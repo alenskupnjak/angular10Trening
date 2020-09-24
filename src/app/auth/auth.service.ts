@@ -45,10 +45,12 @@ export class AuthService {
   }
 
   isAuth() {
-    if (this.user === null) {
-      return false;
-    } else {
+    console.log('xx',this.user);
+
+    if (this.user) {
       return true;
+    } else {
+      return false;
     }
   }
 }
