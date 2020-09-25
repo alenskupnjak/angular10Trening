@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { VjezbeService } from '../vjezbe.service';
 import { StopTrainingComponent } from './stop-training.component';
 
 @Component({
@@ -9,38 +10,52 @@ import { StopTrainingComponent } from './stop-training.component';
   styleUrls: ['./current-training.component.css'],
 })
 export class CurrentTrainingComponent implements OnInit {
-  @Output() treningExit = new EventEmitter();
+  // @Output() treningExit = new EventEmitter();
+
+  // postotak izvedene vjezbe
   progress: number = 0;
   timer: number;
-  constructor(private dialog: MatDialog) {}
+
+  constructor(
+    private dialog: MatDialog,
+    private vjezbeService: VjezbeService
+  ) {}
 
   ngOnInit(): void {
-    this.startStopTimer();
+    // pocinje vjezba i odbrojavanje do 100%
+    this.startTimer();
   }
 
   // pokreni ili stopiraj mjerac vremena
-  startStopTimer() {
+  startTimer() {
+    // povlacimo podatak trenutne vjezbe i dejelimo sa 100 da dobijemo jedan korak i mnozimo sa milisekundama
+    const step = (this.vjezbeService.getTrenutnaVjezba().duration / 100) * 1000;
     this.timer = setInterval(() => {
-      this.progress = this.progress + 5;
+      this.progress = this.progress + 1;
       if (this.progress >= 100) {
+        this.vjezbeService.gotovaVjezba();
         clearInterval(this.timer);
       }
-    }, 1000);
+    }, step);
   }
 
-  onStop() {
+  // pokreni ili stopiraj mjerac vremena
+  onStartStop() {
     clearInterval(this.timer);
     const dialogRef = this.dialog.open(StopTrainingComponent, {
       data: {
         progres: this.progress,
       },
     });
-
+    // true zaustavlja vjezbu i vraca u training.component
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.treningExit.emit();
+        // zaustavili smo vjezbanje
+        this.vjezbeService.prekinutaVjezba(this.progress)
+        // this.treningExit.emit();
       } else {
-        this.startStopTimer();
+        // nastavljamo vjezbanje
+        this.startTimer();
       }
     });
   }

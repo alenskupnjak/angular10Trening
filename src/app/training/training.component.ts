@@ -9,7 +9,7 @@ import { VjezbeService } from './vjezbe.service';
   styleUrls: ['./training.component.css'],
 })
 export class TrainingComponent implements OnInit, OnDestroy {
-  // pratimo dali je vjezba u tijeku ili ne , inicijalno je nema, false
+  // pratimo dali je vjezba u tijeku ili ne , inicijalno je nema = false
   stanjeTreninga: boolean = false;
 
   // cuvanje programa od memory leak-a
@@ -19,8 +19,8 @@ export class TrainingComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.vjezbaSubscription = this.vjezbaService.vjezbaPromjenaStanja.subscribe(
-      (dataKojaVjezba) => {
-        if (dataKojaVjezba) {
+      (dataVjezbaTrenutno) => {
+        if (dataVjezbaTrenutno) {
           this.stanjeTreninga = true;
         } else {
           this.stanjeTreninga = false;
