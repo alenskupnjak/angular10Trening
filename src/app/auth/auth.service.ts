@@ -28,6 +28,7 @@ export class AuthService {
       userId: Math.round(Math.random() * 10000).toString(),
     };
     this.authChange.next(true);
+    // nakon uspjesne registracije preusmjeravamo se na trening stranicu
     this.router.navigate(['/training']);
   }
 

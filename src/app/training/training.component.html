@@ -1,12 +1,20 @@
-<mat-tab-group *ngIf="!stanjeTreninga">
+<!-- GLAVNA STRANICA - TAB-ovi-->
+<mat-tab-group>
+  <!-- rad sa novim vjezbama -->
   <mat-tab label="Nova vježba">
-    <app-newtraining (treningStart)="stanjeTreninga = true" ></app-newtraining>
+    <app-newtraining></app-newtraining>
   </mat-tab>
+
+  <!-- rad sa proslim vjezbama -->
   <mat-tab label="Prošle vježbe">
     <app-past-training></app-past-training>
   </mat-tab>
-  <mat-tab label="Razno">
-    Content 3
+
+  <!-- pokusni tab za event emitter -->
+  <mat-tab *ngIf="!stanjeTreninga" label="Emit">
+    <app-emit-training (treningStart)="stanjeTreninga = true"></app-emit-training>
   </mat-tab>
 </mat-tab-group>
+
+<!-- Vjezbe koja se prikazuje kada aktiviramo START -->
 <app-current-training *ngIf="stanjeTreninga" (treningExit)="stanjeTreninga = false"></app-current-training>

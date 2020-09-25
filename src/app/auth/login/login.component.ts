@@ -9,11 +9,14 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  isLoading: boolean = false;
+  loginForm: FormGroup; // formu definiramo kao reaktivnu
+  isLoading: boolean = false; // podatak za ukljuci/iskljuci spinner
+
+
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+    // definiramo ulazne podatke login forme,
     this.loginForm = new FormGroup({
       email: new FormControl('', {
         validators: [Validators.required, Validators.email],
@@ -24,6 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    // Reaktivna forma, na klik saljemo podatke u authservis
     this.authService.login({
       email: this.loginForm.value.email,
       password: this.loginForm.value.password,

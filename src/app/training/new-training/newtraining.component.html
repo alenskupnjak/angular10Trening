@@ -1,29 +1,25 @@
+
+<!-- Meni koje se prvo pojavljuje u trening sekciji -->
 <section class="new-training" fxLayout fxLayoutAlign="center center">
-  <mat-card fxFlex.xs="100%" fxFlex="400px">
-    <mat-card-title fxLayout fxLayoutAlign="center center">
-      Naslov
-    </mat-card-title>
-    <mat-card-content fxLayout fxLayoutAlign="center center">
-      <mat-form-field>
-        <mat-label>Odaberi vježbu</mat-label>
-        <mat-select>
-          <mat-option value="crunces">
-            Crunces
-          </mat-option>
-          <mat-option value="touch-toes">
-            Touch Toes
-          </mat-option>
-          <mat-option value="side-lunges">
-            Side Lunges
-          </mat-option>
-          <mat-option value="burpees">
-            BurPees
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </mat-card-content>
-    <mat-card-actions fxLayout fxLayoutAlign="center center">
-      <button type="submit" mat-raised-button color="accent" (click)="onStartTrening()" >Start</button>
-    </mat-card-actions>
-  </mat-card>
+  <form (ngSubmit)="onStartTrening(f)" #f="ngForm">
+    <mat-card fxFlex.xs="100%" fxFlex="400px">
+      <mat-card-title fxLayout fxLayoutAlign="center center">
+        Vrijeme za vjezbanje
+      </mat-card-title>
+      <mat-card-content fxLayout fxLayoutAlign="center center">
+        <mat-form-field>
+          <mat-label>Odaberi vježbu</mat-label>
+          <mat-select ngModel name="vjezba" required>
+            <!-- u mat-option mogu imati samo jedan podatak -->
+            <mat-option *ngFor="let vjezba of vjezbe" [value]="vjezba.id">
+              {{ vjezba.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions fxLayout fxLayoutAlign="center center">
+        <button type="submit" mat-raised-button color="accent" [disabled]="f.invalid">Start</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
 </section>

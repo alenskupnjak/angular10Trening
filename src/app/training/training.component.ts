@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { VjezbeService } from './vjezbe.service';
 
 @Component({
   moduleId: 'module.id',
@@ -6,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './training.component.html',
   styleUrls: ['./training.component.css'],
 })
-export class TrainingComponent implements OnInit {
+export class TrainingComponent implements OnInit, OnDestroy {
+  // pratimo dali je vjezba u tijeku ili ne , inicijalno je nema, false
   stanjeTreninga: boolean = false;
-  constructor() {}
 
-  ngOnInit(): void {}
+  // cuvanje programa od memory leak-a
+  vjezbaSubscription: Subscription;
+
+  constructor(private vjezbaService: VjezbeService) {}
+
+  ngOnInit(): void {
+    this.vjezbaSubscription = this.vjezbaService.vjezbaPromjenaStanja.subscribe(
+      (dataKojaVjezba) => {
+        if (dataKojaVjezba) {
+          this.stanjeTreninga = true;
+        } else {
+          this.stanjeTreninga = false;
+        }
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.vjezbaSubscription.unsubscribe();
+  }
 }

@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.mediaSub = this.mediaObserver.media$.subscribe((res) => {
+    this.mediaSub = this.mediaObserver.asObservable().subscribe((res) => {
       console.log(res);
     });
   }

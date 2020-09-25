@@ -21,6 +21,8 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { StopTrainingComponent } from './training/current-training/stop-training.component';
 import { AuthService } from './auth/auth.service';
+import { VjezbeService } from './training/vjezbe.service';
+import { EmitTrainingComponent } from './training/emit-training/emit-training.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { AuthService } from './auth/auth.service';
     WelcomeComponent,
     HeaderComponent,
     SidenavListComponent,
-    StopTrainingComponent
+    StopTrainingComponent,
+    EmitTrainingComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,7 @@ import { AuthService } from './auth/auth.service';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, VjezbeService],
   bootstrap: [AppComponent],
   entryComponents: [StopTrainingComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
