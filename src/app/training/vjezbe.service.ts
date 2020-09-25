@@ -57,7 +57,7 @@ export class VjezbeService {
     this.listaSvihVjezbi.push({
       ...this.trenutnaVjezba,
       duration: this.trenutnaVjezba.duration * (progres / 100),
-      calories: this.trenutnaVjezba.duration * (progres / 100),
+      calories: this.trenutnaVjezba.calories * (progres / 100),
       date: new Date(),
       state: 'cancelled',
     });
@@ -69,5 +69,13 @@ export class VjezbeService {
   // vjezba koja se trenutno izvodi
   getTrenutnaVjezba() {
     return { ...this.trenutnaVjezba };
+  }
+
+  //***************************************
+  // popis svih vjezbi
+  getSveZapisaneVjezbe() {
+    console.log('this.listaSvihVjezbi.slice()=',this.listaSvihVjezbi.slice());
+
+    return this.listaSvihVjezbi.slice();
   }
 }
