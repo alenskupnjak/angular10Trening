@@ -11,8 +11,13 @@
   </mat-tab>
 
   <!-- pokusni tab za event emitter -->
-  <mat-tab *ngIf="!stanjeTreninga" label="Emit">
-    <app-emit-training (treningStart)="stanjeTreninga = true"></app-emit-training>
+  <mat-tab *ngIf="!stanjeTreninga" label="Sortiranje">
+    <app-emit-training></app-emit-training>
+  </mat-tab>
+
+  <!-- pokusni tab za provjeru paginacije -->
+  <mat-tab *ngIf="!stanjeTreninga" label="Paginacija">
+    <app-paginacija></app-paginacija>
   </mat-tab>
 </mat-tab-group>
 

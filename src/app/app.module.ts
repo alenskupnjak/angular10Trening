@@ -24,6 +24,7 @@ import { StopTrainingComponent } from './training/current-training/stop-training
 import { AuthService } from './auth/auth.service';
 import { VjezbeService } from './training/vjezbe.service';
 import { EmitTrainingComponent } from './training/emit-training/emit-training.component';
+import { PaginacijaComponent } from './training/paginacija/paginacija.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { EmitTrainingComponent } from './training/emit-training/emit-training.co
     HeaderComponent,
     SidenavListComponent,
     StopTrainingComponent,
-    EmitTrainingComponent
+    EmitTrainingComponent,
+    PaginacijaComponent
   ],
   imports: [
     BrowserModule,

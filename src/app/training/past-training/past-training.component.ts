@@ -8,7 +8,7 @@ import {
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-
+import { MatPaginator } from '@angular/material/paginator';
 import { Vjezba } from '../vjezba.model';
 import { VjezbeService } from '../vjezbe.service';
 
@@ -28,6 +28,7 @@ export class PastTrainingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // @ViewChild daje pristup template podacima
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private vjezbaService: VjezbeService) {}
 
@@ -46,6 +47,7 @@ export class PastTrainingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   doFilter(filterValue: string) {
