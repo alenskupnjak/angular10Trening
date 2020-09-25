@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms'; // za template driven forms
 import { ReactiveFormsModule } from '@angular/forms'; // za template driven forms
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+// import { MatSortModule } from '@angular/material/sort';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';

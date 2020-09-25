@@ -19,13 +19,7 @@ import { VjezbeService } from '../vjezbe.service';
   styleUrls: ['./past-training.component.css'],
 })
 export class PastTrainingComponent implements OnInit, AfterViewInit, OnDestroy {
-  displayedColumns: string[] = [
-    'date',
-    'name',
-    'calories',
-    'duration',
-    'state',
-  ];
+  displayedColumns = ['date', 'name', 'calories', 'duration', 'state'];
 
   // MatTabledataSource podrazumijeva da ce dobiti podatke u obliku polje
   // stoga ne treba pisati new MatTableDataSource<Vjezba[]>(); !!!
@@ -45,13 +39,17 @@ export class PastTrainingComponent implements OnInit, AfterViewInit, OnDestroy {
       (data) => {
         console.log('akivito se');
         this.dataSource.data = this.vjezbaService.getSveZapisaneVjezbe();
-        this.dataSource.sort = this.sort;
+        // this.dataSource.sort = this.sort;
       }
     );
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+  }
+
+  doFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnDestroy() {

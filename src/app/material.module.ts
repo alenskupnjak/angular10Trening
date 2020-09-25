@@ -37,7 +37,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatTableModule,
-    MatSortModule,
+    MatSortModule  // bez ovog sort ne radi!!!!!
   ],
   exports: [
     MatSliderModule,
@@ -57,7 +57,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatTableModule,
-    MatSortModule,
+    MatSortModule
   ],
 })
 export class MaterialModule {}
