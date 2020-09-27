@@ -33,12 +33,11 @@ export class PastTrainingComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private vjezbaService: VjezbeService) {}
 
   ngOnInit(): void {
-    console.log('----------- xxx');
+    // povlacimo sev podatke za rad u tablici
     this.dataSource.data = this.vjezbaService.getSveZapisaneVjezbe();
 
     this.subMemoryLeakProtect = this.vjezbaService.vjezbaPromjenaStanja.subscribe(
       (data) => {
-        console.log('akivito se');
         this.dataSource.data = this.vjezbaService.getSveZapisaneVjezbe();
         // this.dataSource.sort = this.sort;
       }

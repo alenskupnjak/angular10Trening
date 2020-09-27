@@ -6,7 +6,11 @@ import { FormsModule } from '@angular/forms'; // za template driven forms
 import { ReactiveFormsModule } from '@angular/forms'; // za template driven forms
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-// import { MatSortModule } from '@angular/material/sort';
+
+// FIREBASE
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
@@ -25,6 +29,7 @@ import { AuthService } from './auth/auth.service';
 import { VjezbeService } from './training/vjezbe.service';
 import { EmitTrainingComponent } from './training/emit-training/emit-training.component';
 import { PaginacijaComponent } from './training/paginacija/paginacija.component';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -44,6 +49,9 @@ import { PaginacijaComponent } from './training/paginacija/paginacija.component'
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
     CommonModule,
     BrowserAnimationsModule,
     MaterialModule,
