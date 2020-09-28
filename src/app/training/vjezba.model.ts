@@ -1,5 +1,4 @@
 export interface Vjezba {
-  // id: string;
   name: string;
   duration: number;
   calories: number;

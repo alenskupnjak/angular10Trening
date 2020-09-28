@@ -58,10 +58,15 @@ export class VjezbeService {
           });
         })
       )
-      .subscribe((dataDB) => {
-        this.availableExercisesBase = dataDB;
-        this.vjezbaPromjenaStanjaBaza.next([...this.availableExercisesBase]);
-      });
+      .subscribe(
+        (dataDB) => {
+          this.availableExercisesBase = dataDB;
+          this.vjezbaPromjenaStanjaBaza.next([...this.availableExercisesBase]);
+        },
+        (err) => {
+          console.log('tu je greska');
+        }
+      );
   }
 
   //*******************************************
@@ -120,7 +125,7 @@ export class VjezbeService {
       .snapshotChanges()
       .pipe(
         map((data) => {
-          console.log('medukorak...',data);
+          console.log('..medukorak...', data);
           return data;
         })
       )
@@ -133,15 +138,20 @@ export class VjezbeService {
               name: data.payload.doc.data()['name'],
               duration: data.payload.doc.data()['duration'],
               calories: data.payload.doc.data()['calories'],
-              date: data.payload.doc.data()['date']['seconds'],
+              date: data.payload.doc.data()['date'],
               state: data.payload.doc.data()['state'],
             };
           });
         })
       )
-      .subscribe((dataDB) => {
-        this.finishedExerciseChanged.next(dataDB);
-      });
+      .subscribe(
+        (dataDB) => {
+          this.finishedExerciseChanged.next(dataDB);
+        },
+        (err) => {
+          console.log('tu je greska..', err);
+        }
+      );
   }
 
   // dodavanje podataka u database

@@ -30,7 +30,7 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
     // on ce prosljediti informaviju preko vjezbaPromjenaStanjaBaza Observer-a!
     this.vjezbeService.fetchAvailableExercisesBase();
     // Povlacimo SVE podatke vjezbeDB iz baze
-    this.vjezbeService.vjezbaPromjenaStanjaBaza.subscribe(
+    this.subMemoryLeakProtect = this.vjezbeService.vjezbaPromjenaStanjaBaza.subscribe(
       (popisVjezbiIzBaze) => {
         this.vjezbeDB = popisVjezbiIzBaze;
       }

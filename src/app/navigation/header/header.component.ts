@@ -17,15 +17,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Output() sidenavToggle = new EventEmitter<void>();
   isAuth: boolean = false;
   authSubscription: Subscription;
+  userMenu: string;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+    // promjena statusa, korisnik je logiran
     this.authSubscription = this.authService.authChange.subscribe(
       (authStatus) => {
         this.isAuth = authStatus;
       }
     );
+
+    // this.authService.userChange.subscribe((logiraniuser) => {
+    //   this.userMenu = logiraniuser;
+    // });
   }
 
   onToggleList() {
