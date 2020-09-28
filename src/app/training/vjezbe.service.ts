@@ -139,7 +139,6 @@ export class VjezbeService {
       )
       .pipe(
         map((docArray) => {
-          console.log('aaa', docArray);
           return docArray.map((data) => {
             return {
               id: data.payload.doc.id,

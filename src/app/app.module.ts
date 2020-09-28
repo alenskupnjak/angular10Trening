@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // za template driven forms
 import { ReactiveFormsModule } from '@angular/forms'; // za template driven forms
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+// import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 // FIREBASE
 import { AngularFireModule } from 'angularfire2';
@@ -14,9 +14,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
-import { SignupComponent } from './auth/signup/signup.component';
 
-import { LoginComponent } from './auth/login/login.component';
 import { AuthLoginComponent } from './auth/auth-login.component';
 
 import { TrainingComponent } from './training/training.component';
@@ -37,11 +35,11 @@ import { EmitTrainingComponent } from './training/emit-training/emit-training.co
 import { PaginacijaComponent } from './training/paginacija/paginacija.component';
 import { environment } from '../environments/environment';
 
+import { AuthModule } from './auth/auth.module';
+
 @NgModule({
   declarations: [
     AppComponent,
-    SignupComponent,
-    LoginComponent,
     TrainingComponent,
     CurrentTrainingComponent,
     NewTrainingComponent,
@@ -53,6 +51,7 @@ import { environment } from '../environments/environment';
     EmitTrainingComponent,
     PaginacijaComponent,
     AuthLoginComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -66,10 +65,11 @@ import { environment } from '../environments/environment';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    AuthModule
   ],
   providers: [AuthService, VjezbeService, UIService],
   bootstrap: [AppComponent],
   entryComponents: [StopTrainingComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  // schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
