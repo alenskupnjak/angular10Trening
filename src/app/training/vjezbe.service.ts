@@ -20,13 +20,16 @@ export class VjezbeService {
     { id: 'burpees', name: 'Burpees', duration: 60, calories: 8 },
   ];
 
-
   private availableExercisesBase: Vjezba[] = [];
 
   private trenutnaVjezba: Vjezba; // pratimo koja je trenutna vjezba
-  private listaSvihVjezbi: Vjezba[] = []; // inicijalno prazno polje za sve vjezbe
 
-  constructor(private db: AngularFirestore) {}
+  // inicijalno prazno polje za sve vjezbe
+  private listaSvihVjezbi: Vjezba[] = [];
+
+  constructor(private db: AngularFirestore) {
+    console.log('Vjezbe.service pokrenuto');
+  }
 
   // ************************************************
   // inicijalno povlacimo podatke postojecih vjezbi
@@ -78,7 +81,7 @@ export class VjezbeService {
       )
       .subscribe((dataDB) => {
         this.availableExercisesBase = dataDB;
-        this.vjezbaPromjenaStanjaBaza.next([...this.availableExercisesBase])
+        this.vjezbaPromjenaStanjaBaza.next([...this.availableExercisesBase]);
       });
   }
 
@@ -95,13 +98,22 @@ export class VjezbeService {
   }
 
   // ***************************************
-  // vjezba je gotova, izvrsena je 100$
+  // vjezba je gotova, izvrsena je 100%
   gotovaVjezba() {
+    // dodavanje lokalono u bazu
+    this.addDataToDatabase({
+      ...this.trenutnaVjezba,
+      date: new Date(),
+      state: 'completed',
+    });
+
+    // dodavanje lokalono u polje
     this.listaSvihVjezbi.push({
       ...this.trenutnaVjezba,
       date: new Date(),
       state: 'completed',
     });
+
     this.vjezbaPromjenaStanja.next(null); // vjezba je gotova
     this.trenutnaVjezba = null; // vjezba je gotova
 
@@ -111,6 +123,16 @@ export class VjezbeService {
   //***************************************
   // vjezba je bila prekinuta
   prekinutaVjezba(progres: number) {
+    // dodavanje u bazu
+    this.addDataToDatabase({
+      ...this.trenutnaVjezba,
+      duration: this.trenutnaVjezba.duration * (progres / 100),
+      calories: this.trenutnaVjezba.calories * (progres / 100),
+      date: new Date(),
+      state: 'cancelled',
+    });
+
+    // dodavanje lokalno u listu
     this.listaSvihVjezbi.push({
       ...this.trenutnaVjezba,
       duration: this.trenutnaVjezba.duration * (progres / 100),
@@ -118,6 +140,8 @@ export class VjezbeService {
       date: new Date(),
       state: 'cancelled',
     });
+
+
     this.vjezbaPromjenaStanja.next(null); // vjezba je prekinuta
     this.trenutnaVjezba = null; // vjezba je prekinuta
   }
@@ -131,8 +155,11 @@ export class VjezbeService {
   //***************************************
   // popis svih vjezbi
   getSveZapisaneVjezbe() {
-    console.log('this.listaSvihVjezbi.slice()=', this.listaSvihVjezbi.slice());
-
     return this.listaSvihVjezbi.slice();
+  }
+
+  // dodavanje podataka u database
+  addDataToDatabase(listaVjezbi: Vjezba) {
+    this.db.collection('ang10listavjezbi').add(listaVjezbi)
   }
 }
