@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // za template driven forms
 import { ReactiveFormsModule } from '@angular/forms'; // za template driven forms
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 // FIREBASE
 import { AngularFireModule } from 'angularfire2';
@@ -17,39 +17,28 @@ import { MaterialModule } from './material.module';
 
 import { AuthLoginComponent } from './auth/auth-login.component';
 
-import { TrainingComponent } from './training/training.component';
-import { CurrentTrainingComponent } from './training/current-training/current-training.component';
-import { NewTrainingComponent } from './training/new-training/newtraining.component';
-import { PastTrainingComponent } from './training/past-training/past-training.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
-import { StopTrainingComponent } from './training/current-training/stop-training.component';
 
+// SERVICE
 import { AuthService } from './auth/auth.service';
 import { VjezbeService } from './training/vjezbe.service';
 import { UIService } from './shared/UIservice';
 
-import { EmitTrainingComponent } from './training/emit-training/emit-training.component';
-import { PaginacijaComponent } from './training/paginacija/paginacija.component';
 import { environment } from '../environments/environment';
 
+//MODULE
 import { AuthModule } from './auth/auth.module';
+import { TrainingModule } from './training/training.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TrainingComponent,
-    CurrentTrainingComponent,
-    NewTrainingComponent,
-    PastTrainingComponent,
     WelcomeComponent,
     HeaderComponent,
     SidenavListComponent,
-    StopTrainingComponent,
-    EmitTrainingComponent,
-    PaginacijaComponent,
     AuthLoginComponent,
 
   ],
@@ -65,11 +54,12 @@ import { AuthModule } from './auth/auth.module';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthModule
+    AuthModule,
+    TrainingModule
   ],
   providers: [AuthService, VjezbeService, UIService],
   bootstrap: [AppComponent],
-  entryComponents: [StopTrainingComponent],
-  // schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  // entryComponents: [StopTrainingComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

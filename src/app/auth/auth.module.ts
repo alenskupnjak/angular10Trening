@@ -5,12 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { AuthLoginComponent } from './auth-login.component';
 
 @NgModule({
-  declarations: [
-    SignupComponent,
-    LoginComponent,
-  ],
+  declarations: [SignupComponent, LoginComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -18,7 +16,6 @@ import { SignupComponent } from './signup/signup.component';
     MaterialModule,
     FlexLayoutModule,
   ],
-
-
+  entryComponents: [AuthLoginComponent],
 })
 export class AuthModule {}
