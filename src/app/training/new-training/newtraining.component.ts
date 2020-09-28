@@ -6,6 +6,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Vjezba } from '../vjezba.model';
 import { VjezbeService } from '../vjezbe.service';
@@ -26,7 +27,7 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
   // za ngOndestroy...
   subMemoryLeakProtect: Subscription;
 
-  constructor(private vjezbeService: VjezbeService) {}
+  constructor(private vjezbeService: VjezbeService, private router: Router) {}
 
   ngOnInit(): void {
     // on ce prosljediti informaviju preko vjezbaPromjenaStanjaBaza Observer-a!
@@ -46,6 +47,10 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
 
     // ostavljeno za primjer za ukljucivanje/isklucivanje EMIT TAB-a
     this.treningStart.emit();
+  }
+
+  fetchVjezbe() {
+    this.vjezbeService.fetchAvailableExercisesBase();
   }
 
   ngOnDestroy() {

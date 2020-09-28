@@ -56,7 +56,6 @@ export class PastTrainingComponent implements OnInit, AfterViewInit, OnDestroy {
         this.subfinishedExerciseChanged = this.vjezbaService.finishedExerciseChanged.subscribe(
           (vjezba) => {
             this.dataSource.data = vjezba;
-            console.log('ajmoo', this.dataSource.data);
           }
         );
       }

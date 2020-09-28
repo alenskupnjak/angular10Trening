@@ -28,8 +28,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { StopTrainingComponent } from './training/current-training/stop-training.component';
+
 import { AuthService } from './auth/auth.service';
 import { VjezbeService } from './training/vjezbe.service';
+import { UIService } from './shared/UIservice';
+
 import { EmitTrainingComponent } from './training/emit-training/emit-training.component';
 import { PaginacijaComponent } from './training/paginacija/paginacija.component';
 import { environment } from '../environments/environment';
@@ -49,7 +52,7 @@ import { environment } from '../environments/environment';
     StopTrainingComponent,
     EmitTrainingComponent,
     PaginacijaComponent,
-    AuthLoginComponent
+    AuthLoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,7 @@ import { environment } from '../environments/environment';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthService, VjezbeService],
+  providers: [AuthService, VjezbeService, UIService],
   bootstrap: [AppComponent],
   entryComponents: [StopTrainingComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

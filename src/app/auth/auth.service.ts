@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthLoginComponent } from './auth-login.component';
 
 import { AuthData } from './auth-data.model';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { UIService } from '../shared/UIservice';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +19,7 @@ export class AuthService {
     private router: Router,
     private firebaseAuth: AngularFireAuth,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private uiServis: UIService
   ) {}
 
   // REGISTRACIJA korisnika
@@ -32,13 +32,8 @@ export class AuthService {
         this.router.navigate(['/login']);
       })
       .catch((err) => {
-        let snackBarRef = this.snackBar.open(err.message, 'U redu', {
-          duration: 5000,
-        });
-
-        snackBarRef.afterDismissed().subscribe(() => {
-          console.log('The snack-bar was dismissed');
-        });
+        console.log(err);
+        this.uiServis.showSnackbar('Dogorila se greška kod registracije!', null, 3000);
       });
   }
 

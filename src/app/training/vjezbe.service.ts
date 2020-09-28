@@ -6,8 +6,9 @@ import {
 } from 'angularfire2/firestore';
 import { Subject } from 'rxjs';
 import { Vjezba } from './vjezba.model';
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UIService } from '../shared/UIservice';
+
 @Injectable()
 export class VjezbeService {
   vjezbaDoc: AngularFirestoreDocument<any>;
@@ -28,7 +29,7 @@ export class VjezbeService {
   // pratimo koja je trenutna vjezba
   private trenutnaVjezba: Vjezba;
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private uiService: UIService) {
     console.log('Vjezbe.service pokrenuto');
   }
 
@@ -47,6 +48,8 @@ export class VjezbeService {
       )
       .pipe(
         map((docArray) => {
+          // za ispitivanje programa
+          // throw new Error();
           // console.log('aaa', docArray);
           return docArray.map((data) => {
             return {
@@ -64,7 +67,12 @@ export class VjezbeService {
           this.vjezbaPromjenaStanjaBaza.next([...this.availableExercisesBase]);
         },
         (err) => {
-          console.log('tu je greska');
+          this.uiService.showSnackbar(
+            'Greška kod učitavanja baze,  molim pokušajte ponovo',
+            null,
+            3000
+          );
+          this.vjezbaPromjenaStanjaBaza.next(null);
         }
       );
   }
