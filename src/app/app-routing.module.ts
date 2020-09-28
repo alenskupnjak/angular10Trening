@@ -8,8 +8,13 @@ import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'training', component: TrainingComponent, canActivate: [AuthGuard] },
+  // {
+  //   path: "auth",
+  //   loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  //   // loadChildren: './auth/auth.module#AuthModule', staro rijesenje
+  // },
     // '**' mora biti zadnji u nizu
-  { path: "**", component: NoPageFoundComponent },
+  // { path: "**", component: NoPageFoundComponent },
 ];
 
 @NgModule({
