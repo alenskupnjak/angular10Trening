@@ -15,7 +15,10 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { SignupComponent } from './auth/signup/signup.component';
+
 import { LoginComponent } from './auth/login/login.component';
+import { AuthLoginComponent } from './auth/auth-login.component';
+
 import { TrainingComponent } from './training/training.component';
 import { CurrentTrainingComponent } from './training/current-training/current-training.component';
 import { NewTrainingComponent } from './training/new-training/newtraining.component';
@@ -46,6 +49,7 @@ import { environment } from '../environments/environment';
     StopTrainingComponent,
     EmitTrainingComponent,
     PaginacijaComponent,
+    AuthLoginComponent
   ],
   imports: [
     BrowserModule,

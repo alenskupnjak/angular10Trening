@@ -15,7 +15,7 @@
       <input matInput type="password" placeholder="Your password" formControlName="password">
       <mat-hint>Molim upišite ispravan password</mat-hint>
     </mat-form-field>
-     <button
+     <button *ngIf="!isLoading"
      type="submit"
      mat-raised-button
      color="primary"

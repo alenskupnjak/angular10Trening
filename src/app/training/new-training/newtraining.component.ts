@@ -21,6 +21,8 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
   vjezbe: Vjezba[] = [];
   vjezbeDB: Vjezba[] = [];
 
+  isLoading: boolean = true;
+
   // za ngOndestroy...
   subMemoryLeakProtect: Subscription;
 
@@ -33,6 +35,7 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
     this.subMemoryLeakProtect = this.vjezbeService.vjezbaPromjenaStanjaBaza.subscribe(
       (popisVjezbiIzBaze) => {
         this.vjezbeDB = popisVjezbiIzBaze;
+        this.isLoading = false;
       }
     );
   }
