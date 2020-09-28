@@ -27,15 +27,8 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
   constructor(private vjezbeService: VjezbeService) {}
 
   ngOnInit(): void {
-    // GORNJI MENI
-    // povlačimo podatke iz text file (gornja kucica)
-    this.vjezbe = this.vjezbeService.getAvailableExercisesFile();
-
-    // DONJi meni
-    // inicijalno povlacimo sve definirano vjezbe iz baze
     // on ce prosljediti informaviju preko vjezbaPromjenaStanjaBaza Observer-a!
     this.vjezbeService.fetchAvailableExercisesBase();
-
     // Povlacimo SVE podatke vjezbeDB iz baze
     this.vjezbeService.vjezbaPromjenaStanjaBaza.subscribe(
       (popisVjezbiIzBaze) => {

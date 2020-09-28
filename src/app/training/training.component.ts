@@ -18,7 +18,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
   constructor(private vjezbaService: VjezbeService) {}
 
   ngOnInit(): void {
-    this.vjezbaSubscription = this.vjezbaService.vjezbaPromjenaStanja
+    this.vjezbaSubscription = this.vjezbaService.vjezbaPromjenaStanjaFile
     .subscribe((dataVjezbaTrenutno) => {
       // ako vjezba nije null nastavljamo sa radom
         if (dataVjezbaTrenutno) {

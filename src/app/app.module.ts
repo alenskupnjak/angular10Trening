@@ -30,7 +30,6 @@ import { VjezbeService } from './training/vjezbe.service';
 import { EmitTrainingComponent } from './training/emit-training/emit-training.component';
 import { PaginacijaComponent } from './training/paginacija/paginacija.component';
 import { environment } from '../environments/environment';
-import { PastTrainingDatabaseComponent } from './training/past-training-database/past-training-database.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +46,6 @@ import { PastTrainingDatabaseComponent } from './training/past-training-database
     StopTrainingComponent,
     EmitTrainingComponent,
     PaginacijaComponent,
-    PastTrainingDatabaseComponent
   ],
   imports: [
     BrowserModule,

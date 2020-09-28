@@ -1,31 +1,32 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+  AngularFirestoreCollection,
+} from 'angularfire2/firestore';
 import { Subject } from 'rxjs';
 import { Vjezba } from './vjezba.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 @Injectable()
 export class VjezbeService {
+  vjezbaDoc: AngularFirestoreDocument<any>;
+  vjezbaCollection: AngularFirestoreCollection<any>;
+
   // pratimo promjenu stanja koja je vjezba u tijeku
-  vjezbaPromjenaStanja = new Subject<Vjezba>();
+  vjezbaPromjenaStanjaFile = new Subject<Vjezba>();
 
   // pratimo promjenu stanja popisa vjezbe iz baze (jednom se koristi, kod prvog ucitavanja)
   vjezbaPromjenaStanjaBaza = new Subject<Vjezba[]>();
 
-  // popis svih vjezbi koje su definirane
-  private availableExercisesFile: Vjezba[] = [
-    { id: 'crunches', name: 'Crunches', duration: 30, calories: 8 },
-    { id: 'touch-toes', name: 'Touch Toes', duration: 180, calories: 15 },
-    { id: 'side-lunges', name: 'Side Lunges', duration: 120, calories: 18 },
-    { id: 'burpees', name: 'Burpees', duration: 60, calories: 8 },
-  ];
+  // spremanje liste vjezbi  u bazu
+  finishedExerciseChanged = new Subject<Vjezba[]>();
 
+  // inicijalno prazno polje za sve vjezbe iz baze
   private availableExercisesBase: Vjezba[] = [];
 
-  private trenutnaVjezba: Vjezba; // pratimo koja je trenutna vjezba
-
-  // inicijalno prazno polje za sve vjezbe
-  private listaSvihVjezbi: Vjezba[] = [];
+  // pratimo koja je trenutna vjezba
+  private trenutnaVjezba: Vjezba;
 
   constructor(private db: AngularFirestore) {
     console.log('Vjezbe.service pokrenuto');
@@ -33,24 +34,7 @@ export class VjezbeService {
 
   // ************************************************
   // inicijalno povlacimo podatke postojecih vjezbi
-  getAvailableExercisesFile() {
-    // vracamo kopiju polja
-    return this.availableExercisesFile.slice();
-  }
-
-  // ************************************************
-  // inicijalno povlacimo podatke postojecih vjezbi
   fetchAvailableExercisesBase() {
-    // Za vježbu,  povlacimo samo podatke vjezbeDB iz BAZE
-    //   .valueChanges() - ovim nacinom ne mogi dobiti id!!!
-    this.db
-      .collection('ang10treningizborvjezbi')
-      .valueChanges()
-      .subscribe((dataDB) => {
-        console.log('valueChanges()=', dataDB);
-      });
-
-    // spajamo se na bazu
     this.db
       .collection('ang10treningizborvjezbi')
       .snapshotChanges()
@@ -63,15 +47,10 @@ export class VjezbeService {
       )
       .pipe(
         map((docArray) => {
-          console.log('aaa', docArray);
+          // console.log('aaa', docArray);
           return docArray.map((data) => {
-            // console.log('data=', data);
-            // console.log('data.payload=', data.payload);
-            // console.log('data.payload.doc=', data.payload.doc);
-            // console.log('data.payload.doc.data()=', data.payload.doc.data());
-
             return {
-              id: data.payload.doc.id,
+              // id: data.payload.doc.id,
               name: data.payload.doc.data()['name'],
               duration: data.payload.doc.data()['duration'],
               calories: data.payload.doc.data()['calories'],
@@ -89,12 +68,12 @@ export class VjezbeService {
   // pokrenuta je neka od vjezbi
   startVjezba(selektiranaVjezbaId: string) {
     // moramo pronaci vjezbu o kojoj se radi
-    this.trenutnaVjezba = this.availableExercisesFile.find((data) => {
+    this.trenutnaVjezba = this.availableExercisesBase.find((data) => {
       // return data.id === selektiranaVjezbaId;
       return data.name === selektiranaVjezbaId;
     });
     // saljem u program kopiju odabrane vjezbe koja je odabrana
-    this.vjezbaPromjenaStanja.next({ ...this.trenutnaVjezba });
+    this.vjezbaPromjenaStanjaFile.next({ ...this.trenutnaVjezba });
   }
 
   // ***************************************
@@ -107,17 +86,8 @@ export class VjezbeService {
       state: 'completed',
     });
 
-    // dodavanje lokalono u polje
-    this.listaSvihVjezbi.push({
-      ...this.trenutnaVjezba,
-      date: new Date(),
-      state: 'completed',
-    });
-
-    this.vjezbaPromjenaStanja.next(null); // vjezba je gotova
+    this.vjezbaPromjenaStanjaFile.next(null); // vjezba je gotova
     this.trenutnaVjezba = null; // vjezba je gotova
-
-    console.log('this.listaSvihVjezbi=', this.listaSvihVjezbi);
   }
 
   //***************************************
@@ -132,17 +102,7 @@ export class VjezbeService {
       state: 'cancelled',
     });
 
-    // dodavanje lokalno u listu
-    this.listaSvihVjezbi.push({
-      ...this.trenutnaVjezba,
-      duration: this.trenutnaVjezba.duration * (progres / 100),
-      calories: this.trenutnaVjezba.calories * (progres / 100),
-      date: new Date(),
-      state: 'cancelled',
-    });
-
-
-    this.vjezbaPromjenaStanja.next(null); // vjezba je prekinuta
+    this.vjezbaPromjenaStanjaFile.next(null); // vjezba je prekinuta
     this.trenutnaVjezba = null; // vjezba je prekinuta
   }
 
@@ -154,12 +114,44 @@ export class VjezbeService {
 
   //***************************************
   // popis svih vjezbi
-  getSveZapisaneVjezbe() {
-    return this.listaSvihVjezbi.slice();
+  fetchSveZapisaneVjezbe() {
+    this.db
+      .collection('ang10listavjezbi')
+      .snapshotChanges()
+      .pipe(
+        map((data) => {
+          console.log('medukorak...',data);
+          return data;
+        })
+      )
+      .pipe(
+        map((docArray) => {
+          console.log('aaa', docArray);
+          return docArray.map((data) => {
+            return {
+              id: data.payload.doc.id,
+              name: data.payload.doc.data()['name'],
+              duration: data.payload.doc.data()['duration'],
+              calories: data.payload.doc.data()['calories'],
+              date: data.payload.doc.data()['date']['seconds'],
+              state: data.payload.doc.data()['state'],
+            };
+          });
+        })
+      )
+      .subscribe((dataDB) => {
+        this.finishedExerciseChanged.next(dataDB);
+      });
   }
 
   // dodavanje podataka u database
   addDataToDatabase(listaVjezbi: Vjezba) {
-    this.db.collection('ang10listavjezbi').add(listaVjezbi)
+    this.db.collection('ang10listavjezbi').add(listaVjezbi);
+  }
+
+  // dodavanje podataka u database
+  deleteDataToDatabase(id: string) {
+    this.vjezbaDoc = this.db.doc(`ang10listavjezbi/${id}`);
+    this.vjezbaDoc.delete();
   }
 }

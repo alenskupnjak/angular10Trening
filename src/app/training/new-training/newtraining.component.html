@@ -8,18 +8,6 @@
       <mat-card-content fxLayout="column" fxLayoutAlign="center center">
 
         <mat-form-field>
-          <p>(podaci iz datoteke!)</p>
-          <mat-label>Odaberi vježbu</mat-label>
-          <mat-select ngModel name="vjezba" required>
-            <!-- u mat-option mogu imati samo jedan podatak -->
-            <mat-option *ngFor="let vjezba of vjezbe" [value]="vjezba.name">
-              {{ vjezba.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-          <p>(podaci iz BAZE!)</p>
           <mat-label>Odaberi vježbu</mat-label>
           <mat-select ngModel name="vjezba" required>
             <!-- u mat-option mogu imati samo jedan podatak -->
