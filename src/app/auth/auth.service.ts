@@ -11,6 +11,7 @@ export class AuthService {
   authChange = new Subject<boolean>();
   userChange = new Subject<string>();
   isAuthenticated: boolean = false;
+  userMenu:string;
 
   constructor(private router: Router, private firebaseAuth: AngularFireAuth) {}
 
@@ -19,7 +20,6 @@ export class AuthService {
     this.firebaseAuth.auth
       .createUserWithEmailAndPassword(authData.email, authData.password)
       .then((result) => {
-        this.userChange.next(authData.email)
         this.authChange.next(true);
         // nakon registracije korisnika preusmjeravamo stranicu
         this.router.navigate(['/login']);
@@ -37,6 +37,7 @@ export class AuthService {
         // nakon uspjesne registracije preusmjeravamo se na trening stranicu
         this.router.navigate(['/training']);
         this.authChange.next(true);
+        this.userChange.next(authData.email)
       })
       .catch((err) => {
         console.log(err);
@@ -49,6 +50,10 @@ export class AuthService {
     this.authChange.next(false);
     this.router.navigate(['/login']);
     this.isAuthenticated = false;
+  }
+
+  getUser(){
+    return
   }
 
   isAuth() {

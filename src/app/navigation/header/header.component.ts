@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Output() sidenavToggle = new EventEmitter<void>();
   isAuth: boolean = false;
   authSubscription: Subscription;
-  userMenu: string;
+  userMenu: string = 'nelogiran';
 
   constructor(private authService: AuthService) {}
 
@@ -29,9 +29,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
     );
 
-    // this.authService.userChange.subscribe((logiraniuser) => {
-    //   this.userMenu = logiraniuser;
-    // });
+    this.authService.userChange.subscribe((logiraniuser) => {
+      console.log('logiraniuser=',logiraniuser);
+
+      if(logiraniuser){
+        this.userMenu = logiraniuser;
+      }
+    });
   }
 
   onToggleList() {
