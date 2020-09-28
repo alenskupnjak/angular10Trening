@@ -33,6 +33,10 @@ import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
 import { TrainingModule } from './training/training.module';
 
+//ROUTING
+import { AuthRoutingModule } from './auth/auth-routing.module';
+import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +44,7 @@ import { TrainingModule } from './training/training.module';
     HeaderComponent,
     SidenavListComponent,
     AuthLoginComponent,
-
+    NoPageFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,8 @@ import { TrainingModule } from './training/training.module';
     FormsModule,
     ReactiveFormsModule,
     AuthModule,
-    TrainingModule
+    TrainingModule,
+    AuthRoutingModule
   ],
   providers: [AuthService, VjezbeService, UIService],
   bootstrap: [AppComponent],
