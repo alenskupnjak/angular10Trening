@@ -12,6 +12,7 @@ import { NewTrainingComponent } from './new-training/newtraining.component';
 import { PaginacijaComponent } from './paginacija/paginacija.component';
 import { PastTrainingComponent } from './past-training/past-training.component';
 import { TrainingComponent } from './training.component';
+import { EmitTrainingComponent } from './emit-training/emit-training.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { TrainingComponent } from './training.component';
     NewTrainingComponent,
     TrainingComponent,
     CurrentTrainingComponent,
+    EmitTrainingComponent,
   ],
   imports: [
     BrowserModule,
