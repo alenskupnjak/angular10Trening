@@ -18,7 +18,7 @@
                 "socket.io-parser",
                 "debug"
             ],
-            "outputPath": "angular10Trening",
+            "outputPath": "angular10trening",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
