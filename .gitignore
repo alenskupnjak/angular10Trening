@@ -25,11 +25,8 @@ speed-measure-plugin*.json
 
 # IDE - VSCode
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
+
+
 
 # misc
 /.sass-cache
@@ -41,6 +38,3 @@ yarn-error.log
 testem.log
 /typings
 
-# System Files
-.DS_Store
-Thumbs.db

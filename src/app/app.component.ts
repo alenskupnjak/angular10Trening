@@ -17,8 +17,12 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Pracenje velicine ekrana
     this.mediaSub = this.mediaObserver.asObservable().subscribe((res) => {
       console.log(res);
+      res.forEach(mediasize=>{
+        console.log(mediasize.mqAlias, mediasize.mediaQuery);
+      })
     });
   }
 
